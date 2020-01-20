@@ -5,50 +5,39 @@ Installation
 
 install from github:
 
--git clone git@github.com:ImaneMO/Chatbot.git
-
--cd Chatbot
-
--python setup.py install
+    git clone git@github.com:ImaneMO/Chatbot.git
+    cd Chatbot
+    python setup.py install
 
 Demo
 
->>> from chatbot import demo
-
->>> demo()
-
-Hi, how are you?
-
-> i'm fine
-
-Nice to know that you are fine
-
-> quit
-
-Thank you for talking with me.
-
->>> 
+    >>> from chatbot import demo
+    >>> demo()
+    Hi, how are you?
+    > i'm fine
+    Nice to know that you are fine
+    > quit
+    Thank you for talking with me.
+    >>> 
 
 Sample Code (with wikipedia search API integration)
 
-from chatbot import Chat,MultiFunctionCall
-import wikipedia
 
-def who_is(query,session_id="general"):
+
+    from chatbot import Chat,MultiFunctionCall
+    import wikipedia
+    def who_is(query,session_id="general"):
     try:
-    
-        return wikipedia.summary(query)
+            return wikipedia.summary(query)
     except Except:
         for new_query in wikipedia.search(query):
-           
            try:
                 return wikipedia.summary(new_query)
             except Except:
                 pass
-    
     return "I don't know about "+query
         
-call = MultiFunctionCall({"whoIs":who_is})
-first_question="Hi, how are you?"
-Chat("examples/Example.template",call=call).converse(first_question)
+    call = MultiFunctionCall({"whoIs":who_is})
+    first_question="Hi, how are you?"
+    Chat("examples/Example.template",call=call).converse(first_question)
 
